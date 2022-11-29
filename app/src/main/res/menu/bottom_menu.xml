@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_scanner"
+        android:title="@string/scanner"
+        android:icon="@drawable/ic_scanner"
+        android:orderInCategory="1"/>
+    <item
+        android:id="@+id/navigation_account"
+        android:title="@string/account"
+        android:icon="@drawable/ic_wallet"
+        android:orderInCategory="2"/>
+    <item
+        android:id="@+id/navigation_cart"
+        android:title="@string/cart"
+        android:icon="@drawable/ic_cart"
+        android:orderInCategory="3"/>
+</menu>
