@@ -23,13 +23,11 @@ class BuyProductActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         queue = Volley.newRequestQueue(this)
-        queue = Volley.newRequestQueue(this)
         productId = intent.getIntExtra("product_id", 0)
         if (productId == 0) {
             setResult(RESULT_CANCELED)
             finish()
         }
-        binding.tvName.text = "Random text"
         val url = Constants.API_SERVER + "/products/$productId"
 
         val req = JsonObjectRequest(Request.Method.GET,
@@ -58,7 +56,7 @@ class BuyProductActivity : AppCompatActivity() {
     }
 
     fun onAddClickListener(view: View){
-        val url = Constants.API_SERVER + "/users/5/cart"
+        val url = Constants.API_SERVER + "/users/${Constants.USER_ID}/cart"
 //        Log.d(Constants.LOG_TAG, "URL: $url")
         val data = JSONObject()
         data.put("product_id", productId)

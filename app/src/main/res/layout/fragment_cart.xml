@@ -5,9 +5,33 @@
     android:layout_height="match_parent"
     tools:context=".Cart">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/cart" />
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_view_cart"
+            android:layout_width="match_parent"
+            android:layout_height="512dp" />
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center_horizontal"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_pay"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:insetLeft="0dp"
+            android:onClick="payClickListener"
+            android:text="@string/pay" />
+
+    </LinearLayout>
 
 </FrameLayout>
