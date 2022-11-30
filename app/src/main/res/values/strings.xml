@@ -7,4 +7,5 @@
     <string name="pay">Pay</string>
     <string name="total">Total</string>
     <string name="deposit">Deposit</string>
+    <string name="enterAmount">Enter amount</string>
 </resources>

@@ -26,6 +26,7 @@ import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
+import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
@@ -139,10 +140,17 @@ class Scanner : Fragment() {
                         cameraSource.stop()
                         Toast.makeText(activity?.applicationContext, "value- $scannedValue", Toast.LENGTH_SHORT).show()
                         val i = Intent(activity?.applicationContext, BuyProductActivity::class.java)
-                        val productId = JSONObject(scannedValue).getInt("product_id")
-                        Log.d(Constants.LOG_TAG, "Product ID: $productId")
-                        i.putExtra("product_id", productId)
-                        addProductLauncher.launch(i)
+                        try {
+                            val productId = JSONObject(scannedValue).getInt("product_id")
+//                            Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
+                            Log.d(Constants.LOG_TAG, "Product ID: $productId")
+                            i.putExtra("product_id", productId)
+                            addProductLauncher.launch(i)
+                        } catch (e: JSONException) {
+                            Toast.makeText(requireActivity(), "Wrong code", Toast.LENGTH_SHORT).show()
+                        }
+
+
                     }
                 }else
                 {

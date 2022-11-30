@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.praypay.databinding.ActivityBuyProductBinding
+import org.json.JSONException
 import org.json.JSONObject
 
 class BuyProductActivity : AppCompatActivity() {
@@ -47,7 +49,12 @@ class BuyProductActivity : AppCompatActivity() {
 //                finish()
             },
             {err->
-                Log.e(Constants.LOG_TAG, err.toString())
+                try {
+                    val msg = JSONObject(String(err.networkResponse.data)).getString("msg")
+                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                } catch (e: JSONException) {
+                    Toast.makeText(this, "Unknown error", Toast.LENGTH_SHORT).show()
+                }
                 setResult(RESULT_CANCELED)
                 finish()
             }
