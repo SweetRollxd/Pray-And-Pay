@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scanner">Сканер</string>
+    <string name="cart">Корзина</string>
+    <string name="account">Счет</string>
+    <string name="addToCart">Добавить в корзину</string>
+    <string name="pay">Оплатить</string>
+    <string name="total">Итого</string>
+    <string name="deposit">Пополнить</string>
+    <string name="enterAmount">Введите сумму</string>
+    <string name="history">История операций</string>
+</resources>

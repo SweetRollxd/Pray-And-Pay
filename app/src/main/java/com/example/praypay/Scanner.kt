@@ -134,11 +134,11 @@ class Scanner : Fragment() {
                 val barcodes = detections.detectedItems
                 if (barcodes.size() == 1) {
                     scannedValue = barcodes.valueAt(0).rawValue
-
+//                    cameraSource.stop()
                     //Don't forget to add this line printing value or finishing activity must run on main thread
                     activity?.runOnUiThread {
                         cameraSource.stop()
-                        Toast.makeText(activity?.applicationContext, "value- $scannedValue", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(activity?.applicationContext, "value- $scannedValue", Toast.LENGTH_SHORT).show()
                         val i = Intent(activity?.applicationContext, BuyProductActivity::class.java)
                         try {
                             val productId = JSONObject(scannedValue).getInt("product_id")

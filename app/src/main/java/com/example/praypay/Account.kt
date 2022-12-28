@@ -30,6 +30,7 @@ class Account : Fragment() {
     private lateinit var binding: FragmentAccountBinding
     private lateinit var viewModel: AccountViewModel
     private lateinit var depositActivityLauncher: ActivityResultLauncher<Intent>
+    private lateinit var historyActivityLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,12 +47,26 @@ class Account : Fragment() {
                 Log.e(Constants.LOG_TAG, "Error from activity result: ${result.resultCode}")
             }
 
-
         }
+//        depositActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+//                result->
+//            if (result.resultCode == AppCompatActivity.RESULT_OK){
+//            }
+//            else {
+//                Log.e(Constants.LOG_TAG, "Error from activity result: ${result.resultCode}")
+//            }
+//
+//        }
+
         binding.btnDeposit.setOnClickListener {
             val i = Intent(activity?.applicationContext, DepositActivity::class.java)
             depositActivityLauncher.launch(i)
         }
+
+//        binding.btnHistory.setOnClickListener {
+//            val i = Intent(activity?.applicationContext, DepositActivity::class.java)
+//            historyActivityLauncher.launch(i)
+//        }
 
         refreshBalance()
 

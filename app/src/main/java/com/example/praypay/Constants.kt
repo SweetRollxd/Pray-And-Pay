@@ -2,10 +2,10 @@ package com.example.praypay
 
 object Constants {
     private const val HOST = "217.71.129.139"
-    private const val PORT = 4753
+    private const val PORT = 4162
     const val API_SERVER = "http://$HOST:$PORT"
 
-    const val USER_ID = 5
+    const val USER_ID = 3
 
     const val LOG_TAG = "PrayNPay"
 

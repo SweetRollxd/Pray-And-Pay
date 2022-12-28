@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pray&amp;Pay</string>
+    <string name="app_name" translatable="false">Pray&amp;Pay</string>
     <string name="scanner">Scanner</string>
     <string name="cart">Cart</string>
     <string name="account">Account</string>
@@ -8,4 +8,5 @@
     <string name="total">Total</string>
     <string name="deposit">Deposit</string>
     <string name="enterAmount">Enter amount</string>
+    <string name="history">Operations history</string>
 </resources>

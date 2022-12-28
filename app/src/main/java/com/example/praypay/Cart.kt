@@ -46,30 +46,60 @@ class Cart : Fragment() {
         val queue = Volley.newRequestQueue(requireActivity())
 
         binding.btnPay.setOnClickListener {
-            val url = "${Constants.API_SERVER}/users/${Constants.USER_ID}/purchases"
-            val req = JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                null,
-                {response->
-                    Log.d(Constants.LOG_TAG, "Response from API: ${response.toString()}")
-                    productAdapter.clear()
-                    binding.tvTotal.text = ""
-                    binding.btnPay.visibility = View.GONE
-                },
-                {err->
-                    try {
-                        val msg = JSONObject(String(err.networkResponse.data)).getString("msg")
-                        Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
-                    } catch (e: JSONException) {
-                        Toast.makeText(requireActivity(), "Unknown error", Toast.LENGTH_SHORT).show()
-                    }
+            if (productAdapter.itemCount > 0) {
+                val url = "${Constants.API_SERVER}/users/${Constants.USER_ID}/purchases"
+                val req = JsonObjectRequest(
+                    Request.Method.POST,
+                    url,
+                    null,
+                    { response ->
+                        Log.d(Constants.LOG_TAG, "Response from API: ${response.toString()}")
+                        productAdapter.clear()
+                        binding.tvTotal.text = ""
+                        binding.btnPay.visibility = View.GONE
+                    },
+                    { err ->
+                        try {
+                            var msg = JSONObject(String(err.networkResponse.data)).getString("msg")
+                            if (msg == "Insufficient Funds") msg = "Недостаточно средств"
+                            Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show()
+                        } catch (e: JSONException) {
+                            Toast.makeText(requireActivity(), "Unknown error", Toast.LENGTH_SHORT)
+                                .show()
+                        }
 
-                    Log.e(Constants.LOG_TAG, "${err.toString()}. Response code ${err.networkResponse.statusCode}. Message: ${String(err.networkResponse.data)}")
-                }
-            )
-            queue.add(req)
+                        Log.e(
+                            Constants.LOG_TAG,
+                            "${err.toString()}. Response code ${err.networkResponse.statusCode}. Message: ${
+                                String(err.networkResponse.data)
+                            }"
+                        )
+                    }
+                )
+                queue.add(req)
+            }
         }
+
+//        getCartProducts()
+//        return inflater.inflate(R.layout.fragment_cart, container, false)
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getCartProducts()
+    }
+
+    private fun init() {
+        binding.apply {
+            rcViewCart.layoutManager = LinearLayoutManager(requireActivity())
+            rcViewCart.adapter = productAdapter
+        }
+    }
+
+    private fun getCartProducts(){
+        productAdapter.clear()
+        val queue = Volley.newRequestQueue(requireActivity())
 
         val url = "${Constants.API_SERVER}/users/${Constants.USER_ID}/cart"
         val req = JsonArrayRequest(
@@ -98,20 +128,7 @@ class Cart : Fragment() {
             }
         )
         queue.add(req)
-//        return inflater.inflate(R.layout.fragment_cart, container, false)
-        return binding.root
     }
-
-    private fun init() {
-        binding.apply {
-            rcViewCart.layoutManager = LinearLayoutManager(requireActivity())
-            rcViewCart.adapter = productAdapter
-        }
-    }
-
-//    fun payClickListener(view: View) {
-//
-//    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
